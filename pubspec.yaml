@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   dartz:
+  dio:
   flutter:
     sdk: flutter
 
@@ -37,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
-  mockito:
+  mocktail:
   flutter_test:
     sdk: flutter
 
