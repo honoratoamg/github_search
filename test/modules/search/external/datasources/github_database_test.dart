@@ -12,7 +12,7 @@ class DioMock extends Mock implements Dio{}
 
 main(){
   final dio = DioMock();
-  final datasource = GithubDatasource(dio: dio);
+  final datasource = GithubDatasource(dio);
   RequestOptions options = RequestOptions(path: '');
 
   test("Precisa retornar um lista de ResultSearchModel", () {

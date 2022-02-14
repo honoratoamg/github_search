@@ -8,7 +8,7 @@ import '../../infra/datasources/search_datasource.dart';
 class GithubDatasource implements SearchDatasource {
   late final Dio dio;
 
-  GithubDatasource({required this.dio});
+  GithubDatasource(this.dio);
 
   @override
   Future<List<ResultSearchModel>> getSearch(String searchText) async {

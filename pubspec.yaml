@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bloc:
+  flutter_modular:
   dartz:
   dio:
   flutter:
@@ -38,6 +40,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  modular_test:
   mocktail:
   flutter_test:
     sdk: flutter
