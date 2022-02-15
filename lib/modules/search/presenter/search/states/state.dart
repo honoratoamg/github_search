@@ -3,16 +3,20 @@ import 'package:github_search/modules/search/domain/errors/errors.dart';
 
 abstract class SearchState {}
 
-class SearchSuccess implements SearchState {
-  final List<ResultSearch> list;
-  SearchSuccess(this.list);
+class StartState implements SearchState {
+  const StartState();
 }
 
-class SearchStart implements SearchState {}
+class LoadingState  implements SearchState {
+  const LoadingState();
+}
 
-class SearchLoading implements SearchState {}
-
-class SearchError implements SearchState {
+class ErrorState implements SearchState {
   final FailureSearch error;
-  SearchError(this.error);
+  ErrorState(this.error);
+}
+
+class SuccessState implements SearchState {
+  final List<ResultSearch> list;
+  SuccessState(this.list);
 }

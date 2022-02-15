@@ -7,3 +7,7 @@ class DatasourceError implements FailureSearch {
   // late final String message;
   // DatasourceError({required this.message});
 }
+
+class EmptyList extends FailureSearch {}
+
+class ErrorSearch extends FailureSearch {}

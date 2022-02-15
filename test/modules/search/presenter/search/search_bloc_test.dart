@@ -1,26 +1,47 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:github_search/modules/search/domain/entities/result_search.dart';
+import 'package:github_search/modules/search/domain/errors/errors.dart';
 import 'package:github_search/modules/search/domain/usercases/search_by_text.dart';
 import 'package:github_search/modules/search/presenter/search/search_bloc.dart';
 import 'package:github_search/modules/search/presenter/search/states/state.dart';
 import 'package:mocktail/mocktail.dart';
 
-class SearchByTextMock extends Mock implements SearchByText{}
+class SearchByTextMock extends Mock implements SearchByText {}
 
-main(){
+class SearchBlocMock extends MockBloc<String, SearchState>
+    implements SearchBloc {}
+
+main() {
   final usecase = SearchByTextMock();
-  final bloc = SearchBloc(usecase);
+  var searchBloc = SearchBlocMock();
+  searchBloc.searchByText = usecase;
 
-  // TODO: Finalizar o teste
-  test("Precisa retornar os estados na ordem correta", () {
-    when(() => usecase.call(any())).thenAnswer((_) async => const Right(<ResultSearch>[]));
+  test('Precisa emitir sequencia correta de estados', () async {
+    when(() => usecase.call(any()))
+        .thenAnswer((_) async => const Right(<ResultSearch>[]));
+    whenListen(searchBloc,
+        Stream.fromIterable([LoadingState(), SuccessState(<ResultSearch>[])]));
+    expect(
+        searchBloc.stream,
+        emitsInOrder([
+          isA<LoadingState>(),
+          isA<SuccessState>(),
+        ]));
+  });
 
-    expect(bloc, emitsInOrder([
-      isA<SearchLoading>(),
-      isA<SearchSuccess>(),
-    ]));
+  test("Precisa retornar um erro", () {
+    final error = InvalidTextError();
+    when(() => usecase.call(any())).thenAnswer((_) async => Left(error));
+    whenListen(searchBloc,
+        Stream.fromIterable([const LoadingState(), ErrorState(error)]));
 
-    bloc.add("honorato");
+    expect(
+        searchBloc.stream,
+        emitsInOrder([
+          isA<LoadingState>(),
+          isA<ErrorState>(),
+        ]));
   });
 }

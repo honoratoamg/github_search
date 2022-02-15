@@ -19,9 +19,9 @@ class ResultSearchModel extends ResultSearch{
 
   static ResultSearchModel fromMap(Map<String, dynamic> map) {
     return ResultSearchModel(
-        title: map['title'] ?? '',
-        img: map['img'] ?? '',
-        content: map['content'] ?? '',
+        title: map['login'] ?? '',
+        img: map['avatar_url'] ?? '',
+        content: map['url'] ?? '',
     );
   }
 
