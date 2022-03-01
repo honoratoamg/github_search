@@ -1,6 +1,6 @@
 # github_search
 
-A project to apply Clean Architecture concepts based on the concepts learned in the Flutterando channel
+Um projeto criado para aplicar conceitos de Clean Architecture com base nos conceitos aprendidos no canal Flutterando.
 
 ## Tecnologias
 
